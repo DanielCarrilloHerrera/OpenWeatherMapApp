@@ -1,6 +1,7 @@
 package marwendoukh.openweathermapapp;
 
 
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import marwendoukh.openweathermapapp.Classes.AppController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         temperature = (TextView)findViewById(R.id.tvTemperature);
         description = (TextView) findViewById(R.id.tvDescription);
         weatherBackground = (ImageView) findViewById(R.id.weatherBackground);
-
+        //layout = (RelativeLayout)findViewById(android.R.id.content).getRootView();
+        layout = (RelativeLayout) findViewById(R.id.rlPrincipal);
         cargarBarraProgreso();
         realizarPeticionHttp();
     }
@@ -63,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
         layout.addView(pBar, params);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        //Barra de progreso
+        if(pBar.getParent()!= null)
+            ((ViewGroup)pBar.getParent()).removeView(pBar);
+
         layout.addView(pBar,params);
         pBar.setVisibility(View.VISIBLE);  //Mostrar pBar
     }
